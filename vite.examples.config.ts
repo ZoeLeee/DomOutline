@@ -7,24 +7,10 @@ export default defineConfig({
     port: 3000,
     open: true
   },
-  build: {
-    outDir: '../dist-examples',
-    emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'examples/index.html'),
-        basic: resolve(__dirname, 'examples/basic/index.html'),
-        advanced: resolve(__dirname, 'examples/advanced/index.html'),
-        events: resolve(__dirname, 'examples/events/index.html'),
-        iframe: resolve(__dirname, 'examples/iframe/index.html'),
-        custom: resolve(__dirname, 'examples/custom/index.html'),
-        test: resolve(__dirname, 'examples/test.html')
-      }
-    }
-  },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src')
+      // 将 dist 路径映射到项目根目录的 dist 文件夹
+      '/dist': resolve(__dirname, 'dist')
     }
   }
 });
