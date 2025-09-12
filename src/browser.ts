@@ -442,4 +442,3 @@ const theRoomAPI: TheRoomAPI = {
 
 // 同时导出为模块
 export default theRoomAPI;
-export { theRoomAPI as TheRoom };

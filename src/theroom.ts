@@ -2,7 +2,7 @@ import { TheRoomOptions, TheRoomAPI, Status, EventHandler, HookEventHandler } fr
 
 // TheRoom 类实现
 export class TheRoom implements TheRoomAPI {
-  private status: Status = 'idle';
+  private _status: Status = 'idle';
   private options: TheRoomOptions = {
     inspector: undefined,
     htmlClass: true,
@@ -230,7 +230,7 @@ export class TheRoom implements TheRoomAPI {
 
       if (this.options.htmlClass === true) htmlEl.className += ' theroom';
 
-      this.status = 'running';
+      this._status = 'running';
     } else if (type === 'stop') {
       win.document.removeEventListener('click', this.eventEmitter, true);
       win.document.removeEventListener('mousemove', this.eventEmitter);
@@ -244,7 +244,7 @@ export class TheRoom implements TheRoomAPI {
       if (this.options.blockRedirection === true)
         window.removeEventListener('beforeunload', () => true);
 
-      this.status = 'stopped';
+      this._status = 'stopped';
     }
   }
 
@@ -355,7 +355,7 @@ export class TheRoom implements TheRoomAPI {
   }
 
   status(): Status {
-    return this.status;
+    return this._status;
   }
 }
 
@@ -364,4 +364,3 @@ const theRoom = new TheRoom();
 
 // 导出默认实例和类
 export default theRoom;
-export { TheRoom };
