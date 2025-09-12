@@ -12,7 +12,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:js && npm run build:types",
+    "build:js": "vite build",
+    "build:types": "tsc --project tsconfig.build.json && node scripts/build-types.js",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "examples": "vite --config vite.examples.config.ts",
