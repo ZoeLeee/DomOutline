@@ -1,5 +1,6 @@
 import { TheRoomOptions, TheRoomAPI, Status, EventHandler, HookEventHandler } from './types';
 
+// 浏览器版本的 IIFE 包装器
 (function (window: Window, document: Document, namespace: string) {
   let status: Status = 'idle';
 
@@ -201,11 +202,6 @@ import { TheRoomOptions, TheRoomAPI, Status, EventHandler, HookEventHandler } fr
     const scrollLeft = ('documentElement' in scrollBaseRoot && scrollBaseRoot.documentElement) 
       ? scrollBaseRoot.documentElement.scrollLeft 
       : 0;
-
-    // 保存当前状态（这些变量可能在未来版本中使用）
-    // currentScrollLeft = scrollLeft;
-    // currentScrollTop = scrollTop;
-    // currentBodyTop = bodyTop;
 
     const width = pos.width;
     const height = pos.height;
@@ -444,14 +440,14 @@ import { TheRoomOptions, TheRoomAPI, Status, EventHandler, HookEventHandler } fr
   };
 
   // 高亮
-  const highLight = (color: string = 'rgba(255, 229, 190, 0.4)'): void => {
+  const highLight = (color: string = 'rgba(255, 229, 190, 0.4)') => {
     if (options.inspector) {
       (options.inspector as HTMLDivElement).style.background = color;
     }
   };
 
   // 取消高亮
-  const cancelHighLight = (): void => {
+  const cancelHighLight = () => {
     if (options.inspector) {
       (options.inspector as HTMLDivElement).style.background = 'unset';
     }
