@@ -1,13 +1,16 @@
 {
-  "name": "theroomjs",
+  "name": "dom-outline",
   "version": "2.1.6",
   "description": "a vanilla javascript plugin that allows you to outline dom elements like web inspectors",
   "main": "index.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
+    "build:ts": "tsc",
+    "watch:ts": "tsc --watch",
     "lint": "npm run lint:standard",
-    "lint:standard": "standard --verbose | snazzy || exit 0"
+    "lint:standard": "standard --verbose | snazzy || exit 0",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -33,14 +36,21 @@
     "gulp-header": "^2.0.9",
     "gulp-rename": "^2.0.0",
     "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
     "snazzy": "^9.0.0",
-    "standard": "^16.0.3"
+    "standard": "^16.0.3",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
   },
   "standard": {
     "ignore": [
       "/dist/",
       "/src/theroom.js"
     ]
-  }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ]
 }

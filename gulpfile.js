@@ -4,6 +4,7 @@ const rename = require('gulp-rename')
 const uglify = require('gulp-uglify')
 const header = require('gulp-header')
 const del = require('del')
+const ts = require('gulp-typescript')
 const pkg = require('./package.json')
 
 const tpl = `
@@ -17,9 +18,12 @@ const tpl = `
 `.trimStart()
 
 const paths = {
-  srcFile: './src/*.js',
+  srcFile: './src/*.ts',
   dist: './dist/'
 }
+
+// TypeScript 项目配置
+const tsProject = ts.createProject('tsconfig.json')
 
 // clean dist folder
 gulp.task('clean', function () {
@@ -31,11 +35,18 @@ gulp.task('watch', function () {
   return gulp.watch([paths.srcFile], gulp.series('build'))
 })
 
+// TypeScript 编译任务
+gulp.task('compile-ts', function () {
+  return gulp.src(paths.srcFile)
+    .pipe(tsProject())
+    .pipe(gulp.dest(paths.dist))
+})
+
 // generate/build production file in dist folder
-gulp.task('build', gulp.series('clean', function () {
+gulp.task('build', gulp.series('clean', 'compile-ts', function () {
   const sourcemaps = require('gulp-sourcemaps')
 
-  return gulp.src(paths.srcFile)
+  return gulp.src(paths.dist + '*.js')
     .pipe(sourcemaps.init())
     .pipe(
       header(tpl, pkg)
@@ -58,6 +69,7 @@ gulp.task(
   'default',
   gulp.series(
     'clean',
+    'compile-ts',
     'build',
     'watch'
   )
