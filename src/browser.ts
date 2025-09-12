@@ -338,6 +338,11 @@ const start = function (opts?: TheRoomOptions): void {
     theRoomAPI.configure(opts);
   }
 
+  // 如果没有设置 inspector 且没有设置 createInspector，则默认创建 inspector
+  if (!options.inspector && !options.createInspector) {
+    options.createInspector = true;
+  }
+
   options.inspector = getInspector();
 
   eventController('starting');
