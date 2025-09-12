@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe 内容 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        .content {
+            max-width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #2196f3;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .list li:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <h2>iframe 内容 1</h2>
+            <p>这是第一个 iframe 的内容，可以在这里检查元素</p>
+        </div>
+        
+        <div class="card">
+            <h3>交互元素</h3>
+            <button class="btn">按钮 1</button>
+            <button class="btn">按钮 2</button>
+            <button class="btn">按钮 3</button>
+        </div>
+        
+        <div class="card">
+            <h3>表单元素</h3>
+            <input type="text" placeholder="输入框" style="padding: 8px; margin: 5px; width: 200px;">
+            <select style="padding: 8px; margin: 5px;">
+                <option>选项 1</option>
+                <option>选项 2</option>
+                <option>选项 3</option>
+            </select>
+            <textarea placeholder="文本域" style="padding: 8px; margin: 5px; width: 200px; height: 60px;"></textarea>
+        </div>
+        
+        <div class="card">
+            <h3>列表内容</h3>
+            <ul class="list">
+                <li>列表项 1 - 可以检查这个元素</li>
+                <li>列表项 2 - 鼠标悬停查看轮廓</li>
+                <li>列表项 3 - 点击获取详细信息</li>
+                <li>列表项 4 - 支持键盘导航</li>
+            </ul>
+        </div>
+        
+        <div class="highlight">
+            <h4>特殊区域</h4>
+            <p>这是一个高亮区域，用于测试检查器的视觉效果。</p>
+            <div style="background: #e8f5e8; padding: 10px; border-radius: 4px; margin: 10px 0;">
+                <p>嵌套的 div 元素</p>
+                <span style="background: #ffebee; padding: 5px; border-radius: 3px;">内联元素</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomOutline - TypeScript 示例集合</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .example-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .example-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .example-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .example-card .features li {
+            padding: 5px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .example-card .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .example-card .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .example-card .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stats {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        
+        .stats h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+        }
+        
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .footer .links {
+            margin-top: 20px;
+        }
+        
+        .footer .links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer .links a:hover {
+            opacity: 1;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .badge.new {
+            background: #ff9800;
+        }
+        
+        .badge.advanced {
+            background: #9c27b0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .example-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DomOutline</h1>
+            <p>一个强大的 TypeScript DOM 元素检查器库，支持现代浏览器和高级功能</p>
+        </div>
+        
+        <div class="stats">
+            <h2>项目统计</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">示例场景</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">TypeScript 覆盖</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">事件类型</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">浏览器支持</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="examples-grid">
+            <div class="example-card">
+                <h3>基础使用示例 <span class="badge">入门</span></h3>
+                <p>学习 DomOutline 的基本使用方法，包括启动检查器、鼠标交互和键盘导航。</p>
+                <ul class="features">
+                    <li>启动和停止检查器</li>
+                    <li>鼠标悬停显示轮廓</li>
+                    <li>点击元素获取信息</li>
+                    <li>键盘导航支持</li>
+                    <li>状态管理</li>
+                </ul>
+                <a href="basic/index.html" class="btn">查看示例</a>
+            </div>
+            
+            <div class="example-card">
+                <h3>高级配置示例 <span class="badge advanced">高级</span></h3>
+                <p>探索高级配置选项，包括自定义检查器、排除选择器和事件钩子系统。</p>
+                <ul class="features">
+                    <li>自定义检查器元素</li>
+                    <li>排除选择器配置</li>
+                    <li>事件钩子系统</li>
+                    <li>详细事件日志</li>
+                    <li>配置选项演示</li>
+                </ul>
+                <a href="advanced/index.html" class="btn">查看示例</a>
+            </div>
+            
+            <div class="example-card">
+                <h3>事件处理示例 <span class="badge">交互</span></h3>
+                <p>深入了解各种事件处理器的使用，包括鼠标、键盘和钩子事件。</p>
+                <ul class="features">
+                    <li>鼠标事件处理</li>
+                    <li>键盘事件监听</li>
+                    <li>钩子事件拦截</li>
+                    <li>实时事件统计</li>
+                    <li>性能优化建议</li>
+                </ul>
+                <a href="events/index.html" class="btn">查看示例</a>
+            </div>
+            
+            <div class="example-card">
+                <h3>iframe 支持示例 <span class="badge new">新功能</span></h3>
+                <p>展示 DomOutline 在 iframe 中的使用和跨框架检查功能。</p>
+                <ul class="features">
+                    <li>跨框架检查</li>
+                    <li>同源 iframe 支持</li>
+                    <li>跨域检测处理</li>
+                    <li>多框架支持</li>
+                    <li>框架识别</li>
+                </ul>
+                <a href="iframe/index.html" class="btn">查看示例</a>
+            </div>
+            
+            <div class="example-card">
+                <h3>自定义检查器示例 <span class="badge advanced">自定义</span></h3>
+                <p>学习如何创建和使用自定义的检查器元素，实现个性化的视觉效果。</p>
+                <ul class="features">
+                    <li>多种检查器样式</li>
+                    <li>动态样式切换</li>
+                    <li>自定义标签显示</li>
+                    <li>动画效果控制</li>
+                    <li>实时内容更新</li>
+                </ul>
+                <a href="custom/index.html" class="btn">查看示例</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>DomOutline TypeScript 版本 - 强大的 DOM 元素检查器</p>
+            <p>支持现代浏览器，提供完整的类型安全和开发体验</p>
+            <div class="links">
+                <a href="https://github.com/your-repo/dom-outline">GitHub</a>
+                <a href="https://www.npmjs.com/package/dom-outline">NPM</a>
+                <a href="../../README_TypeScript.md">文档</a>
+                <a href="https://github.com/your-repo/dom-outline/issues">问题反馈</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

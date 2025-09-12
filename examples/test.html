@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomOutline 测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .test-area {
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DomOutline 测试页面</h1>
+        <p>这是一个简单的测试页面，用于验证 DomOutline 是否正常工作。</p>
+        
+        <div class="test-area">
+            <h2>测试区域</h2>
+            <p>在这个区域移动鼠标，查看检查器是否正常工作。</p>
+            <button class="btn">测试按钮 1</button>
+            <button class="btn">测试按钮 2</button>
+            <div style="padding: 15px; background: #e8f5e8; border-radius: 4px; margin: 10px 0;">
+                <h3>嵌套元素</h3>
+                <p>这是一个嵌套的 div 元素。</p>
+            </div>
+        </div>
+        
+        <div>
+            <button class="btn" onclick="startInspector()">启动检查器</button>
+            <button class="btn" onclick="stopInspector()">停止检查器</button>
+            <button class="btn" onclick="checkElement()">检查特定元素</button>
+        </div>
+        
+        <div id="status" style="margin-top: 20px; padding: 10px; background: #f8f9fa; border-radius: 4px;">
+            状态: 未启动
+        </div>
+    </div>
+
+    <!-- 引入 DomOutline 库 -->
+    <script src="../dist/index.js"></script>
+    
+    <script>
+        function updateStatus() {
+            const status = theRoom.status();
+            document.getElementById('status').textContent = `状态: ${status}`;
+        }
+        
+        function startInspector() {
+            theRoom.start();
+            updateStatus();
+            console.log('检查器已启动');
+        }
+        
+        function stopInspector() {
+            theRoom.stop();
+            updateStatus();
+            console.log('检查器已停止');
+        }
+        
+        function checkElement() {
+            const testArea = document.querySelector('.test-area');
+            theRoom.check(testArea);
+            console.log('正在检查测试区域');
+        }
+        
+        // 绑定事件
+        theRoom.on('click', (target, event, originTarget, depth) => {
+            if (target) {
+                console.log('点击了元素:', target.tagName);
+            }
+        });
+        
+        // 初始化
+        updateStatus();
+        console.log('DomOutline 测试页面已加载');
+    </script>
+</body>
+</html>

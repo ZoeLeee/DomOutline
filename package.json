@@ -10,11 +10,13 @@
     "watch:ts": "tsc --watch",
     "lint": "npm run lint:standard",
     "lint:standard": "standard --verbose | snazzy || exit 0",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "examples": "node examples/start-server.js",
+    "examples:dev": "node examples/start-server.js 3001"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hsynlms/theroomjs.git"
+    "url": "git+https://github.com/ZoeLeee/DomOutline.git"
   },
   "keywords": [
     "inspection",
@@ -23,12 +25,12 @@
     "dom",
     "outline"
   ],
-  "author": "Huseyin ELMAS",
+  "author": "Joe Lee",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hsynlms/theroomjs/issues"
+    "url": "https://github.com/ZoeLeee/DomOutline/issues"
   },
-  "homepage": "https://github.com/hsynlms/theroomjs#readme",
+  "homepage": "https://github.com/ZoeLeee/DomOutline#readme",
   "devDependencies": {
     "chalk": "^4.1.1",
     "del": "^6.0.0",
