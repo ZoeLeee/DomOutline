@@ -1,6 +1,6 @@
 {
   "name": "dom-outline",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "a vanilla javascript plugin that allows you to outline dom elements like web inspectors",
   "main": "dist/index.js",
   "module": "dist/index.js",
