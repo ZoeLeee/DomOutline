@@ -6,7 +6,12 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/browser.ts'),
       name: 'TheRoom',
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => {
+        if (format === 'es') {
+          return 'index.js';
+        }
+        return `index.${format}.js`;
+      },
       formats: ['es', 'umd']
     },
     rollupOptions: {
