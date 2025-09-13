@@ -66,7 +66,6 @@ export class TheRoom implements TheRoomAPI {
   }
 
   private updateSelectBox(target: HTMLElement, inspector: HTMLElement = this.options.inspector as HTMLElement): void {
-    let bodyTop = 0;
     const currentRoot = target.getRootNode() as Document | ShadowRoot;
     const originRoot = inspector.getRootNode() as Document | ShadowRoot;
 
@@ -74,12 +73,6 @@ export class TheRoom implements TheRoomAPI {
       inspector.parentElement?.remove();
       (currentRoot as Document).body?.appendChild(inspector.parentElement as HTMLElement);
     }
-
-    document.documentElement.childNodes.forEach(function (i) {
-      if (i.nodeType === Node.ELEMENT_NODE && (i as Element).tagName === 'DIV') {
-        bodyTop += (i as HTMLElement).offsetHeight || 0;
-      }
-    });
 
     const pos = target.getBoundingClientRect();
     const scrollBaseRoot = ('body' in currentRoot && currentRoot.body) ? currentRoot : originRoot;
@@ -92,7 +85,7 @@ export class TheRoom implements TheRoomAPI {
 
     const width = pos.width;
     const height = pos.height;
-    const top = Math.max(0, pos.top - bodyTop + scrollTop);
+    const top = Math.max(0, pos.top + scrollTop);
     const left = Math.max(0, pos.left + scrollLeft);
 
     inspector.style.top = top + 'px';
